@@ -194,3 +194,24 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; text-align: center
 .reviews { display: flex; flex-wrap: wrap; justify-content: center; }
 .reviews li { flex: 1 1 300px; max-width: 350px; }
 .reviews .review { height: 100%; }
+
+/* Foto galerij */
+.galerij { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+.galerij li { border-radius: var(--radius); overflow: hidden; box-shadow: var(--schaduw); background: var(--wit); }
+.galerij a { display: block; }
+.galerij img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .3s; }
+.galerij a:hover img, .galerij a:focus-visible img { transform: scale(1.06); }
+.galerij li:first-child { grid-column: span 2; grid-row: span 2; }
+.galerij-inhoud { margin-top: 2rem; }
+.galerij-inhoud .wp-block-gallery { gap: 1rem; }
+.galerij-inhoud img { border-radius: var(--radius); }
+.lightbox { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100%; height: 100%; }
+.lightbox[open] { display: flex; align-items: center; justify-content: center; }
+.lightbox::backdrop { background: rgba(31, 22, 17, .92); }
+.lightbox img { max-width: min(92vw, 1200px); max-height: 88vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); }
+.lb-close, .lb-nav { position: absolute; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .15); color: var(--wit); cursor: pointer; width: 48px; height: 48px; font-size: 2rem; line-height: 1; }
+.lb-close { top: 1rem; right: 1rem; }
+.lb-prev { left: 1rem; } .lb-next { right: 1rem; }
+.lb-nav { top: 50%; transform: translateY(-50%); }
+.lb-close:hover, .lb-nav:hover, .lb-close:focus-visible, .lb-nav:focus-visible { background: var(--rood); }
+@media (max-width: 640px) { .galerij { grid-template-columns: repeat(2, 1fr); } .galerij li:first-child { grid-column: span 2; grid-row: auto; } .lb-prev { left: .25rem; } .lb-next { right: .25rem; } }

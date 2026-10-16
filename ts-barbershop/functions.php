@@ -28,6 +28,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'tsb-main', get_template_directory_uri() . '/assets/css/main.css', array( 'tsb-style', 'tsb-fonts' ), TSB_VERSION );
 	wp_enqueue_script( 'tsb-feedback', get_template_directory_uri() . '/assets/js/feedback.js', array(), TSB_VERSION, true );
 	wp_enqueue_script( 'tsb-products', get_template_directory_uri() . '/assets/js/products.js', array(), TSB_VERSION, true );
+	wp_enqueue_script( 'tsb-gallery', get_template_directory_uri() . '/assets/js/gallery.js', array(), TSB_VERSION, true );
 	wp_enqueue_script( 'tsb-menu', get_template_directory_uri() . '/assets/js/menu.js', array(), TSB_VERSION, true );
 } );
 
@@ -242,17 +243,23 @@ add_action( 'admin_init', function () {
 	tsb_sync_services();
 } );
 
-/** Maakt de pagina "Afspraak maken" aan als die nog niet bestaat (bij activeren van het thema). */
-function tsb_ensure_afspraak_page() {
-	if ( get_page_by_path( 'afspraak' ) ) {
+/** Maakt een pagina aan als die nog niet bestaat. */
+function tsb_ensure_page( $slug, $title ) {
+	if ( get_page_by_path( $slug ) ) {
 		return;
 	}
 	wp_insert_post( array(
 		'post_type'    => 'page',
 		'post_status'  => 'publish',
-		'post_title'   => 'Afspraak maken',
-		'post_name'    => 'afspraak',
+		'post_title'   => $title,
+		'post_name'    => $slug,
 		'post_content' => '',
 	) );
+}
+
+/** De pagina's die het thema nodig heeft (bij activeren van het thema). */
+function tsb_ensure_afspraak_page() {
+	tsb_ensure_page( 'afspraak', 'Afspraak maken' );
+	tsb_ensure_page( 'foto-galerij', 'Foto galerij' );
 }
 add_action( 'after_switch_theme', 'tsb_ensure_afspraak_page' );
