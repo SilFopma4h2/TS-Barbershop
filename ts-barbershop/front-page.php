@@ -13,14 +13,14 @@ $diensten = array(
 );
 
 $producten = array(
-	array( 'Nish Man Wax Rugby', '6', 'product-nish-man-wax-rugby.png' ),
-	array( 'Nish Man Wax Keratine', '6', 'product-nish-man-wax-keratine.png' ),
-	array( 'Nish Man Gel Mystic Gummy', '6', 'product-nish-man-gel-mystic-gummy.png' ),
-	array( 'Nish Man Shampoo', '6', 'product-nish-man-shampoo.png' ),
-	array( 'Mr Rebel Black', '10', 'product-mr-rebel-black.png' ),
-	array( 'Mr Rebel Red', '10', 'product-mr-rebel-red.png' ),
-	array( 'Cologne', '6', 'product-cologne.jpg' ),
-	array( 'Shaving gel', '10', 'product-shaving-gel.png' ),
+	array( 'Nish Man Wax Rugby', '6', 'product-nish-man-wax-rugby.png', 'Haarwax', 'Haarwax om je kapsel te stylen en in model te houden.' ),
+	array( 'Nish Man Wax Keratine', '6', 'product-nish-man-wax-keratine.png', 'Haarwax', 'Haarwax met keratine om je kapsel te stylen en in model te houden.' ),
+	array( 'Nish Man Gel Mystic Gummy', '6', 'product-nish-man-gel-mystic-gummy.png', 'Haargel', 'Stylinggel voor een strak gestyled kapsel.' ),
+	array( 'Nish Man Shampoo', '6', 'product-nish-man-shampoo.png', 'Shampoo', 'Shampoo voor heren om je haar te wassen.' ),
+	array( 'Mr Rebel Black', '10', 'product-mr-rebel-black.png', 'Verzorging', 'Verzorgingsproduct van Mr Rebel, uitvoering Black.' ),
+	array( 'Mr Rebel Red', '10', 'product-mr-rebel-red.png', 'Verzorging', 'Verzorgingsproduct van Mr Rebel, uitvoering Red.' ),
+	array( 'Cologne', '6', 'product-cologne.jpg', 'Cologne', 'Cologne voor een frisse geur na het knippen of scheren.' ),
+	array( 'Shaving gel', '10', 'product-shaving-gel.png', 'Scheren', 'Scheergel voor een soepele, gladde scheerbeurt.' ),
 );
 ?>
 <section class="hero">
@@ -73,11 +73,15 @@ $producten = array(
 		</div>
 
 		<h3 class="subtitle">Producten</h3>
+		<p class="lead">Alle producten zijn te koop in de winkel. Klik op een product voor meer informatie.</p>
 		<ul class="products">
 			<?php foreach ( $producten as $p ) : ?>
 				<li>
-					<div class="thumb"><img src="<?php echo esc_url( $img . $p[2] ); ?>" alt="<?php echo esc_attr( $p[0] ); ?>" loading="lazy"></div>
-					<div class="info"><span class="naam"><?php echo esc_html( $p[0] ); ?></span><span class="prijs">&euro; <?php echo esc_html( $p[1] ); ?></span></div>
+					<button type="button" class="product-open" data-naam="<?php echo esc_attr( $p[0] ); ?>" data-prijs="<?php echo esc_attr( $p[1] ); ?>" data-img="<?php echo esc_url( $img . $p[2] ); ?>" data-cat="<?php echo esc_attr( $p[3] ); ?>" data-info="<?php echo esc_attr( $p[4] ); ?>" aria-haspopup="dialog">
+						<span class="thumb"><img src="<?php echo esc_url( $img . $p[2] ); ?>" alt="" loading="lazy"></span>
+						<span class="info"><span class="naam"><?php echo esc_html( $p[0] ); ?></span><span class="prijs">&euro; <?php echo esc_html( $p[1] ); ?></span></span>
+						<span class="meer">Meer info</span>
+					</button>
 				</li>
 			<?php endforeach; ?>
 		</ul>
@@ -140,4 +144,16 @@ $producten = array(
 		</form>
 	</div>
 </section>
+<dialog id="product-dialog" class="product-dialog" aria-labelledby="pd-naam">
+	<form method="dialog"><button class="pd-close" aria-label="Sluiten">&times;</button></form>
+	<div class="pd-img"><img id="pd-img" src="" alt=""></div>
+	<div class="pd-body">
+		<span class="pd-cat" id="pd-cat"></span>
+		<h3 id="pd-naam"></h3>
+		<p class="pd-prijs" id="pd-prijs"></p>
+		<p id="pd-info"></p>
+		<p class="pd-winkel">Te koop in de winkel · <?php echo esc_html( strtok( tsb_get( 'adres' ), "\n" ) ); ?>, Oosterbeek</p>
+		<p class="note">Vraag gerust de barber om advies.</p>
+	</div>
+</dialog>
 <?php get_footer(); ?>

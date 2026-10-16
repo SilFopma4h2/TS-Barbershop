@@ -27,6 +27,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'tsb-style', get_stylesheet_uri(), array(), TSB_VERSION );
 	wp_enqueue_style( 'tsb-main', get_template_directory_uri() . '/assets/css/main.css', array( 'tsb-style', 'tsb-fonts' ), TSB_VERSION );
 	wp_enqueue_script( 'tsb-feedback', get_template_directory_uri() . '/assets/js/feedback.js', array(), TSB_VERSION, true );
+	wp_enqueue_script( 'tsb-products', get_template_directory_uri() . '/assets/js/products.js', array(), TSB_VERSION, true );
 	wp_enqueue_script( 'tsb-menu', get_template_directory_uri() . '/assets/js/menu.js', array(), TSB_VERSION, true );
 } );
 

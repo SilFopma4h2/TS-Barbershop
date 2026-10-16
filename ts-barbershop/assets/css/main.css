@@ -130,3 +130,36 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; text-align: center
 	
 	.two-col h2 { text-align: center; }
 }
+
+/* Klikbare producten */
+.product-open { all: unset; box-sizing: border-box; display: block; width: 100%; cursor: pointer; text-align: center; position: relative; }
+.product-open:focus-visible { outline: 3px solid var(--rood); outline-offset: -3px; border-radius: var(--radius); }
+.products li { transition: transform .2s, box-shadow .2s; }
+.products li:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0, 0, 0, .14); }
+.products .thumb { overflow: hidden; }
+.products .thumb img { transition: transform .3s; }
+.products li:hover .thumb img { transform: scale(1.06); }
+.product-open .info { display: block; }
+.product-open .meer { display: block; padding: 0 1rem 1rem; font-size: .85rem; font-weight: 700; color: var(--rood-donker); }
+.product-open .meer::after { content: ' \2192'; }
+
+.product-dialog { border: 0; border-radius: var(--radius); padding: 0; width: min(760px, 100% - 32px); max-height: calc(100% - 32px); overflow: auto; box-shadow: 0 30px 80px rgba(0, 0, 0, .4); }
+.product-dialog[open] { display: grid; grid-template-columns: 1fr 1fr; animation: inkomen .25s ease; }
+.product-dialog::backdrop { background: rgba(56, 42, 34, .7); backdrop-filter: blur(3px); }
+.pd-img { background: #f7f7f7; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+.pd-img img { width: 100%; max-height: 380px; object-fit: contain; }
+.pd-body { padding: 2rem; align-self: center; }
+.pd-body h3 { margin: .25rem 0 .5rem; font-size: 1.6rem; }
+.pd-cat { font-size: .8rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--rood); }
+.pd-prijs { font-size: 1.6rem; font-weight: 800; color: var(--donker); margin: 0 0 1rem; }
+.pd-close { position: absolute; top: .75rem; right: .75rem; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--wit); color: var(--donker); font-size: 1.6rem; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 0, 0, .2); }
+.pd-close:hover, .pd-close:focus-visible { background: var(--rood); color: var(--wit); }
+@media (max-width: 640px) { .product-dialog[open] { grid-template-columns: 1fr; } }
+.product-dialog > form { display: contents; }
+.pd-winkel { display: inline-block; background: #fdeee9; color: var(--rood-donker); font-weight: 700; font-size: .9rem; border-radius: 999px; padding: .35rem 1rem; margin: .5rem 0 0; }
+.subtitle + .lead { margin-top: -1rem; }
+@media (max-width: 640px) {
+	.products { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+	.products .naam { font-size: .85rem; }
+	.product-open .meer { padding: 0 .75rem .85rem; }
+}
