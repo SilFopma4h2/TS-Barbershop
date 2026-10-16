@@ -4,8 +4,8 @@
   "settings": {
     "color": {
       "palette": [
-        { "slug": "rood", "name": "Rood", "color": "#ee1d23" },
-        { "slug": "donker", "name": "Donker", "color": "#333333" },
+        { "slug": "oranje", "name": "Oranje", "color": "#f25b3a" },
+        { "slug": "bruin", "name": "Bruin", "color": "#48362c" },
         { "slug": "tekst", "name": "Tekst", "color": "#666666" },
         { "slug": "licht", "name": "Licht", "color": "#efefef" },
         { "slug": "wit", "name": "Wit", "color": "#ffffff" }

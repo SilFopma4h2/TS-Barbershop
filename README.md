@@ -1,6 +1,6 @@
 # TS-Barbershop
 
-WordPress-thema (`ts-barbershop/`) voor de nieuwe website van Barbershop Oosterbeek. Kleuren en lettertype komen van de huidige site: rood `#ee1d23`, donker `#333`, tekst `#666`, licht `#efefef`, Open Sans.
+WordPress-thema (`ts-barbershop/`) voor de nieuwe website van Barbershop Oosterbeek. Kleuren en lettertype komen van de huidige site: rood `#f25b3a`, donker `#333`, tekst `#666`, licht `#efefef`, Open Sans.
 
 De repo bevat alleen het thema. WordPress zelf en de database draaien lokaal in LocalWP.
 

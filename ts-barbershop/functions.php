@@ -26,6 +26,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	);
 	wp_enqueue_style( 'tsb-style', get_stylesheet_uri(), array(), TSB_VERSION );
 	wp_enqueue_style( 'tsb-main', get_template_directory_uri() . '/assets/css/main.css', array( 'tsb-style', 'tsb-fonts' ), TSB_VERSION );
+	wp_enqueue_script( 'tsb-feedback', get_template_directory_uri() . '/assets/js/feedback.js', array(), TSB_VERSION, true );
 	wp_enqueue_script( 'tsb-menu', get_template_directory_uri() . '/assets/js/menu.js', array(), TSB_VERSION, true );
 } );
 
@@ -128,3 +129,19 @@ function tsb_handle_contact() {
 }
 add_action( 'admin_post_nopriv_tsb_contact', 'tsb_handle_contact' );
 add_action( 'admin_post_tsb_contact', 'tsb_handle_contact' );
+
+/**
+ * Openingstijden uit de Customizer als JSON voor feedback.js (0 = zondag).
+ * Herkent "09:30 - 18:00"; alles anders (bv. "Gesloten") telt als dicht.
+ */
+function tsb_hours_json() {
+	$map   = array( 'zondag' => 0, 'maandag' => 1, 'dinsdag' => 2, 'woensdag' => 3, 'donderdag' => 4, 'vrijdag' => 5, 'zaterdag' => 6 );
+	$hours = array_fill( 0, 7, null );
+	foreach ( tsb_pairs( tsb_get( 'tijden' ) ) as $row ) {
+		$day = strtolower( $row[0] );
+		if ( isset( $map[ $day ] ) && preg_match( '/(\d{1,2}:\d{2})\s*[-–—]\s*(\d{1,2}:\d{2})/', $row[1], $m ) ) {
+			$hours[ $map[ $day ] ] = array( $m[1], $m[2] );
+		}
+	}
+	return wp_json_encode( $hours );
+}

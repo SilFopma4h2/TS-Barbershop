@@ -13,29 +13,41 @@ $diensten = array(
 );
 
 $producten = array(
-	array( 'Nish Man Wax Rugby', '6' ),
-	array( 'Nish Man Wax Keratine', '6' ),
-	array( 'Nish Man Gel Mystic Gummy', '6' ),
-	array( 'Nish Man Shampoo', '6' ),
-	array( 'Mr Rebel Black', '10' ),
-	array( 'Mr Rebel Red', '10' ),
-	array( 'Cologne', '6' ),
-	array( 'Shaving gel', '10' ),
+	array( 'Nish Man Wax Rugby', '6', 'product-nish-man-wax-rugby.png' ),
+	array( 'Nish Man Wax Keratine', '6', 'product-nish-man-wax-keratine.png' ),
+	array( 'Nish Man Gel Mystic Gummy', '6', 'product-nish-man-gel-mystic-gummy.png' ),
+	array( 'Nish Man Shampoo', '6', 'product-nish-man-shampoo.png' ),
+	array( 'Mr Rebel Black', '10', 'product-mr-rebel-black.png' ),
+	array( 'Mr Rebel Red', '10', 'product-mr-rebel-red.png' ),
+	array( 'Cologne', '6', 'product-cologne.jpg' ),
+	array( 'Shaving gel', '10', 'product-shaving-gel.png' ),
 );
 ?>
-<section class="hero" style="background-image:url('<?php echo esc_url( $img . 'sfeer.jpg' ); ?>')">
-	<div class="hero-overlay">
-		<div class="wrap">
-			<h1><?php bloginfo( 'name' ); ?></h1>
-			<p>Knippen en baard scheren in Oosterbeek</p>
-			<a class="btn" href="#afspraak">Reserveer nu online</a>
+<section class="hero">
+	<div class="wrap hero-inner">
+		<div>
+			<span class="status" role="status">Openingstijden laden…</span>
+			<span class="eyebrow">Oosterbeek</span>
+			<h1>Strak geknipt. Zonder gedoe.</h1>
+			<p>Knippen en baard scheren voor dames, heren en kinderen. Kom langs of reserveer online.</p>
+			<a class="btn" href="#afspraak">Reserveer nu online</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a>
+			<div class="hero-facts">
+				<div><strong>Di t/m za</strong>09:30 - 18:00</div>
+				<div><strong><?php echo esc_html( strtok( tsb_get( 'adres' ), "
+" ) ); ?></strong><?php echo esc_html( trim( substr( tsb_get( 'adres' ), strpos( tsb_get( 'adres' ) . "
+", "
+" ) ) ) ); ?></div>
+				<div><strong><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></strong>Bel gerust</div>
+			</div>
 		</div>
 	</div>
 </section>
 
 <section class="section" id="diensten">
 	<div class="wrap">
+		<span class="eyebrow">Behandelingen</span>
 		<h2>Wat we doen</h2>
+		<p class="lead">Van een snelle knipbeurt tot een nette baard.</p>
 		<ul class="cards">
 			<?php foreach ( $diensten as $d ) : ?>
 				<li>
@@ -48,21 +60,27 @@ $producten = array(
 </section>
 
 <section class="section section-licht" id="prijzen">
-	<div class="wrap narrow">
+	<div class="wrap">
+		<span class="eyebrow">Prijzen</span>
 		<h2>Wat het kost</h2>
-		<table class="price-table">
+		<div class="narrow" style="margin:2rem auto 0">
+		<div class="panel"><table class="price-table">
 			<?php foreach ( tsb_pairs( tsb_get( 'prijzen' ) ) as $row ) : ?>
 				<tr><th scope="row"><?php echo esc_html( $row[0] ); ?></th><td>&euro; <?php echo esc_html( $row[1] ); ?></td></tr>
 			<?php endforeach; ?>
-		</table>
+		</table></div>
 		<p class="note"><?php echo esc_html( tsb_get( 'prijsnoot' ) ); ?></p>
+		</div>
 
-		<h3>Producten</h3>
-		<table class="price-table">
+		<h3 class="subtitle">Producten</h3>
+		<ul class="products">
 			<?php foreach ( $producten as $p ) : ?>
-				<tr><th scope="row"><?php echo esc_html( $p[0] ); ?></th><td>&euro; <?php echo esc_html( $p[1] ); ?></td></tr>
+				<li>
+					<div class="thumb"><img src="<?php echo esc_url( $img . $p[2] ); ?>" alt="<?php echo esc_attr( $p[0] ); ?>" loading="lazy"></div>
+					<div class="info"><span class="naam"><?php echo esc_html( $p[0] ); ?></span><span class="prijs">&euro; <?php echo esc_html( $p[1] ); ?></span></div>
+				</li>
 			<?php endforeach; ?>
-		</table>
+		</ul>
 	</div>
 </section>
 
@@ -78,8 +96,9 @@ $producten = array(
 	</div>
 </section>
 
-<section class="section section-donker" id="openingstijden">
+<section class="section section-donker" id="openingstijden" data-hours="<?php echo esc_attr( tsb_hours_json() ); ?>">
 	<div class="wrap narrow">
+		<span class="eyebrow">Wanneer</span>
 		<h2>Openingstijden</h2>
 		<table class="price-table price-table-donker">
 			<?php foreach ( tsb_pairs( tsb_get( 'tijden' ) ) as $row ) : ?>
