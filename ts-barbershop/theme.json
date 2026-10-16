@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "palette": [
+        { "slug": "rood", "name": "Rood", "color": "#ee1d23" },
+        { "slug": "donker", "name": "Donker", "color": "#333333" },
+        { "slug": "tekst", "name": "Tekst", "color": "#666666" },
+        { "slug": "licht", "name": "Licht", "color": "#efefef" },
+        { "slug": "wit", "name": "Wit", "color": "#ffffff" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        { "slug": "open-sans", "name": "Open Sans", "fontFamily": "'Open Sans', Arial, sans-serif" }
+      ]
+    },
+    "layout": { "contentSize": "760px", "wideSize": "1100px" }
+  }
+}
