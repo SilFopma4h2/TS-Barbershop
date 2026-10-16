@@ -24,7 +24,7 @@
 				$home = esc_url( home_url( '/' ) );
 				echo '<ul>';
 				echo '<li><a href="' . $home . '#openingstijden">Openingstijden</a></li>';
-				echo '<li><a href="' . $home . '#afspraak">Afspraak maken</a></li>';
+				echo '<li><a href="' . esc_url( tsb_afspraak_url() ) . '">Afspraak maken</a></li>';
 				echo '<li><a href="' . esc_url( home_url( '/foto-galerij/' ) ) . '">Foto galerij</a></li>';
 				echo '<li><a href="' . $home . '#contactformulier">Contact</a></li>';
 				echo '</ul>';

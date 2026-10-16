@@ -146,3 +146,113 @@ function tsb_hours_json() {
 	}
 	return wp_json_encode( $hours );
 }
+
+/** Behandelingen: naam, foto, prijs en korte uitleg (voor homepage en afspraakpagina). */
+function tsb_diensten() {
+	return array(
+		array( 'slug' => 'heren', 'naam' => 'Knippen heren', 'img' => 'behandeling-heren-knippen.jpg', 'prijs' => '20,00', 'tekst' => 'Een nette herenknipbeurt, met of zonder afspraak.' ),
+		array( 'slug' => 'dames', 'naam' => 'Knippen dames', 'img' => 'behandeling-dames-knippen.jpg', 'prijs' => '20,00', 'tekst' => 'Knippen voor dames. Wassen kan er als extra bij.' ),
+		array( 'slug' => 'kinderen', 'naam' => 'Knippen kinderen', 'img' => 'behandeling-kinderen.jpg', 'prijs' => '17,00', 'tekst' => 'Knippen voor kinderen tot en met 14 jaar.' ),
+		array( 'slug' => 'baard', 'naam' => 'Baard scheren/modelleren', 'img' => 'behandeling-scheren.jpg', 'prijs' => '13,00', 'tekst' => 'Je baard netjes scheren of in model brengen.' ),
+		array( 'slug' => 'knippen-baard', 'naam' => 'Knippen & baard', 'img' => 'behandeling-knippen-en-baard.jpg', 'prijs' => '33,00', 'tekst' => 'Knippen en baard in één afspraak.' ),
+		array( 'slug' => 'tondeuse', 'naam' => 'Tondeuse', 'img' => 'behandeling-tondeuze.jpg', 'prijs' => '14,00', 'tekst' => 'Met de tondeuse, in één lengte of met een nette overgang.' ),
+	);
+}
+
+/** De afspraakpagina (slug "afspraak"), of null als die ontbreekt. */
+function tsb_afspraak_page() {
+	return get_page_by_path( 'afspraak' );
+}
+
+/** Salon Booking System-dienst (post) die bij onze behandeling hoort, op basis van de slug. */
+function tsb_sln_service( $slug ) {
+	if ( ! post_type_exists( 'sln_service' ) ) {
+		return null;
+	}
+	$post = get_page_by_path( $slug, OBJECT, 'sln_service' );
+	return $post ? $post : null;
+}
+
+/**
+ * URL naar de afspraakpagina. Met een behandeling gebruikt dit de eigen "boek nu"-route van
+ * Salon Booking System, zodat die dienst al is aangevinkt op de afspraakpagina. Zonder plugin of
+ * dienst valt het terug op ?dienst=slug (dan toont de pagina alleen de samenvatting).
+ */
+function tsb_afspraak_url( $dienst = '' ) {
+	$page = tsb_afspraak_page();
+	$url  = $page ? get_permalink( $page ) : home_url( '/afspraak/' );
+	if ( ! $dienst ) {
+		return $url;
+	}
+	$service = tsb_sln_service( $dienst );
+	if ( $service && class_exists( 'SLN_Shortcode_SalonServices' ) ) {
+		return add_query_arg( array(
+			'action'  => SLN_Shortcode_SalonServices::BOOK_NOW_REDIRECT_ACTION,
+			'service' => $service->ID,
+		), $url );
+	}
+	return add_query_arg( 'dienst', $dienst, $url );
+}
+
+/**
+ * Zet de behandelingen als diensten in Salon Booking System (alleen wat nog ontbreekt, bestaande
+ * diensten blijven ongemoeid) en stelt de afspraakpagina in als boekingspagina. Draait één keer
+ * nadat de plugin actief is, en kan ook met `wp eval 'tsb_sync_services();'` worden gestart.
+ */
+function tsb_sync_services() {
+	if ( ! post_type_exists( 'sln_service' ) || ! class_exists( 'SLN_Plugin' ) ) {
+		return false;
+	}
+	$order = 0;
+	foreach ( tsb_diensten() as $d ) {
+		$order++;
+		if ( tsb_sln_service( $d['slug'] ) ) {
+			continue;
+		}
+		$id = wp_insert_post( array(
+			'post_type'   => 'sln_service',
+			'post_status' => 'publish',
+			'post_title'  => $d['naam'],
+			'post_name'   => $d['slug'],
+		) );
+		if ( ! $id || is_wp_error( $id ) ) {
+			continue;
+		}
+		update_post_meta( $id, '_sln_service_price', str_replace( ',', '.', $d['prijs'] ) );
+		update_post_meta( $id, '_sln_service_duration', '00:30' );
+		update_post_meta( $id, '_sln_service_exec_order', $order );
+	}
+
+	$settings = get_option( 'salon_settings', array() );
+	$page     = tsb_afspraak_page();
+	if ( $page ) {
+		$settings['pay'] = $page->ID;
+	}
+	$settings['pay_currency'] = 'EUR';
+	update_option( 'salon_settings', $settings );
+	update_option( 'tsb_services_synced', TSB_VERSION );
+	return true;
+}
+
+add_action( 'admin_init', function () {
+	if ( get_option( 'tsb_services_synced' ) || ! post_type_exists( 'sln_service' ) ) {
+		return;
+	}
+	tsb_ensure_afspraak_page();
+	tsb_sync_services();
+} );
+
+/** Maakt de pagina "Afspraak maken" aan als die nog niet bestaat (bij activeren van het thema). */
+function tsb_ensure_afspraak_page() {
+	if ( get_page_by_path( 'afspraak' ) ) {
+		return;
+	}
+	wp_insert_post( array(
+		'post_type'    => 'page',
+		'post_status'  => 'publish',
+		'post_title'   => 'Afspraak maken',
+		'post_name'    => 'afspraak',
+		'post_content' => '',
+	) );
+}
+add_action( 'after_switch_theme', 'tsb_ensure_afspraak_page' );

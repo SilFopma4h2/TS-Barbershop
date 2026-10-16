@@ -163,3 +163,34 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; text-align: center
 	.products .naam { font-size: .85rem; }
 	.product-open .meer { padding: 0 .75rem .85rem; }
 }
+
+/* Behandelingen als link naar de afspraakpagina */
+.cards li { padding: 0; }
+.cards li a { display: block; padding: 1.5rem 1rem; text-decoration: none; color: inherit; border-radius: var(--radius); }
+.cards li a:focus-visible { outline: 3px solid var(--rood); outline-offset: -3px; }
+.kaart-cta { display: block; margin-top: .5rem; font-style: normal; font-size: .85rem; font-weight: 700; color: var(--rood-donker); }
+.cards li:hover .kaart-cta { text-decoration: underline; }
+
+/* Afspraakpagina */
+.afspraak-pagina .eyebrow { margin-top: 1.25rem; }
+.terug { font-weight: 600; text-decoration: none; font-size: .9rem; }
+.terug:hover { text-decoration: underline; }
+.pagina-titel { text-align: center; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 1.5rem; }
+.dienst-samenvatting { display: flex; gap: 1.25rem; align-items: center; background: var(--wit); border-radius: var(--radius); box-shadow: var(--schaduw); padding: 1.25rem; margin-bottom: 2rem; }
+.dienst-samenvatting img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 4px var(--rood); flex: none; }
+.dienst-samenvatting strong { color: var(--donker); font-size: 1.15rem; }
+.dienst-samenvatting p { margin: .25rem 0 0; }
+.cta-blok { text-align: center; }
+.cta-blok .lead { margin-bottom: 1.5rem; }
+@media (max-width: 640px) { .dienst-samenvatting { flex-direction: column; text-align: center; } }
+[hidden] { display: none !important; }
+
+/* Recensies */
+.reviews { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.review { background: var(--wit); border-radius: var(--radius); box-shadow: var(--schaduw); padding: 1.75rem; margin: 0; position: relative; }
+.review::before { content: '\201C'; position: absolute; top: .4rem; left: 1.25rem; font-size: 4rem; line-height: 1; color: var(--rood); font-weight: 800; }
+.review p { margin: 1.5rem 0 1rem; color: var(--donker); font-size: 1.05rem; }
+.review footer { font-weight: 700; color: var(--rood-donker); }
+.reviews { display: flex; flex-wrap: wrap; justify-content: center; }
+.reviews li { flex: 1 1 300px; max-width: 350px; }
+.reviews .review { height: 100%; }

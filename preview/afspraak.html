@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="nl">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Afspraak maken · Barbershop Oosterbeek (voorbeeld)</title>
+	<link rel="icon" href="../ts-barbershop/assets/img/favicon.png">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap">
+	<link rel="stylesheet" href="../ts-barbershop/assets/css/main.css">
+</head>
+<body>
+<header class="site-header">
+	<div class="wrap header-inner">
+		<a class="brand" href="index.html"><img src="../ts-barbershop/assets/img/logo.png" alt="Barbershop Oosterbeek" width="64" height="47"></a>
+		<button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+		<nav id="site-nav" class="site-nav" aria-label="Hoofdmenu">
+			<ul>
+				<li><a href="index.html#openingstijden">Openingstijden</a></li>
+				<li><a href="afspraak.html">Afspraak maken</a></li>
+				<li><a href="#">Foto galerij</a></li>
+				<li><a href="index.html#contactformulier">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<main>
+<section class="section section-licht afspraak-pagina"><div class="wrap narrow">
+	<a class="terug" href="index.html#diensten">&larr; Terug naar behandelingen</a>
+	<span class="eyebrow">Afspraak maken</span>
+	<h1 class="pagina-titel" id="titel">Kies je behandeling en tijd</h1>
+	<div class="dienst-samenvatting" id="samenvatting" hidden>
+		<img id="s-img" src="" alt="" width="150" height="150">
+		<div>
+			<strong id="s-prijs"></strong>
+			<p id="s-tekst"></p>
+			<p class="note">Je kunt hieronder een andere behandeling kiezen of er een bij nemen.</p>
+		</div>
+	</div>
+	<p class="note">Hier komt de online agenda (Salon Booking System). Dit voorbeeld toont alleen de opmaak en de gekozen behandeling.</p>
+	<p class="note">Bij annulering minder dan 8 uur van tevoren wordt 50% van de kosten van de afspraak in rekening gebracht. Annuleren kan via de website of telefonisch.</p>
+</div></section>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner">
+	<div><strong>Barbershop Oosterbeek</strong><br>Weverstraat 17a<br>6862 DJ Oosterbeek</div>
+	<div><a href="tel:0262201708">026-2201708</a><br><a href="mailto:info@barbershop-oosterbeek.nl">info@barbershop-oosterbeek.nl</a></div>
+	<div><a href="https://www.facebook.com/robertskapsalon/" target="_blank" rel="noopener">Facebook</a><br>&copy; 2026 Barbershop Oosterbeek</div>
+</div></footer>
+<script src="../ts-barbershop/assets/js/menu.js"></script>
+<script>
+(function () {
+	var d = {"heren":{"naam":"Knippen heren","img":"behandeling-heren-knippen.jpg","prijs":"20,00","tekst":"Een nette herenknipbeurt, met of zonder afspraak."},"dames":{"naam":"Knippen dames","img":"behandeling-dames-knippen.jpg","prijs":"20,00","tekst":"Knippen voor dames. Wassen kan er als extra bij."},"kinderen":{"naam":"Knippen kinderen","img":"behandeling-kinderen.jpg","prijs":"17,00","tekst":"Knippen voor kinderen tot en met 14 jaar."},"baard":{"naam":"Baard scheren/modelleren","img":"behandeling-scheren.jpg","prijs":"13,00","tekst":"Je baard netjes scheren of in model brengen."},"knippen-baard":{"naam":"Knippen & baard","img":"behandeling-knippen-en-baard.jpg","prijs":"33,00","tekst":"Knippen en baard in één afspraak."},"tondeuse":{"naam":"Tondeuse","img":"behandeling-tondeuze.jpg","prijs":"14,00","tekst":"Met de tondeuse, in één lengte of met een nette overgang."}};
+	var k = d[new URLSearchParams(location.search).get('dienst')];
+	if (!k) { return; }
+	document.getElementById('titel').textContent = k.naam;
+	document.getElementById('s-img').src = '../ts-barbershop/assets/img/' + k.img;
+	document.getElementById('s-prijs').textContent = '\u20ac ' + k.prijs + ' \u00b7 30 minuten';
+	document.getElementById('s-tekst').textContent = k.tekst;
+	document.getElementById('samenvatting').hidden = false;
+})();
+</script>
+</body>
+</html>

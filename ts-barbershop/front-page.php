@@ -1,15 +1,15 @@
 <?php
 get_header();
 $img      = get_template_directory_uri() . '/assets/img/';
+$diensten  = tsb_diensten();
 $verzonden = isset( $_GET['verzonden'] ) ? sanitize_key( $_GET['verzonden'] ) : '';
 
-$diensten = array(
-	array( 'behandeling-heren-knippen.jpg', 'Knippen heren' ),
-	array( 'behandeling-dames-knippen.jpg', 'Knippen dames' ),
-	array( 'behandeling-kinderen.jpg', 'Knippen kinderen' ),
-	array( 'behandeling-scheren.jpg', 'Baard scheren/modelleren' ),
-	array( 'behandeling-knippen-en-baard.jpg', 'Knippen & baard' ),
-	array( 'behandeling-tondeuze.jpg', 'Tondeuse' ),
+$reviews = array(
+	array( 'Harry', 'Heel goede kapper.En voordelig.' ),
+	array( 'Floris', 'Erg goede kapper, houdt rekening met de wens van de klant.' ),
+	array( 'Google-recensie', 'Goeie zaak mooie prijs en doe wat er gevraagt word in een woord top tent' ),
+	array( 'Google-recensie', 'Fijne zaak snel geholpen goede prijs/kwaliteit' ),
+	array( 'Google-recensie', 'Altijd top, knipt super goed en goede prijs. Mooie fade ook.' ),
 );
 
 $producten = array(
@@ -30,13 +30,10 @@ $producten = array(
 			<span class="eyebrow">Oosterbeek</span>
 			<h1>Strak geknipt. Zonder gedoe.</h1>
 			<p>Knippen en baard scheren voor dames, heren en kinderen. Kom langs of reserveer online.</p>
-			<a class="btn" href="#afspraak">Reserveer nu online</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a>
+			<a class="btn" href="<?php echo esc_url( tsb_afspraak_url() ); ?>">Reserveer nu online</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a>
 			<div class="hero-facts">
 				<div><strong>Di t/m za</strong>09:30 - 18:00</div>
-				<div><strong><?php echo esc_html( strtok( tsb_get( 'adres' ), "
-" ) ); ?></strong><?php echo esc_html( trim( substr( tsb_get( 'adres' ), strpos( tsb_get( 'adres' ) . "
-", "
-" ) ) ) ); ?></div>
+				<div><strong><?php echo esc_html( strtok( tsb_get( 'adres' ), "\n" ) ); ?></strong><?php echo esc_html( trim( substr( tsb_get( 'adres' ), strpos( tsb_get( 'adres' ) . "\n", "\n" ) ) ) ); ?></div>
 				<div><strong><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></strong>Bel gerust</div>
 			</div>
 		</div>
@@ -51,8 +48,11 @@ $producten = array(
 		<ul class="cards">
 			<?php foreach ( $diensten as $d ) : ?>
 				<li>
-					<img src="<?php echo esc_url( $img . $d[0] ); ?>" alt="" width="150" height="150" loading="lazy">
-					<span><?php echo esc_html( $d[1] ); ?></span>
+					<a href="<?php echo esc_url( tsb_afspraak_url( $d['slug'] ) ); ?>">
+						<img src="<?php echo esc_url( $img . $d['img'] ); ?>" alt="" width="150" height="150" loading="lazy">
+						<span><?php echo esc_html( $d['naam'] ); ?></span>
+						<em class="kaart-cta">Afspraak maken &rarr;</em>
+					</a>
 				</li>
 			<?php endforeach; ?>
 		</ul>
@@ -88,14 +88,24 @@ $producten = array(
 	</div>
 </section>
 
+<section class="section" id="reviews">
+	<div class="wrap">
+		<span class="eyebrow">Over ons</span>
+		<h2>Wat onze klanten zeggen</h2>
+		<ul class="reviews">
+			<?php foreach ( $reviews as $r ) : ?>
+				<li><blockquote class="review"><p><?php echo esc_html( $r[1] ); ?></p><footer><?php echo esc_html( $r[0] ); ?></footer></blockquote></li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+</section>
+
 <section class="section" id="afspraak">
-	<div class="wrap narrow">
-		<h2>Afspraak maken</h2>
-		<?php if ( shortcode_exists( 'salon' ) ) : ?>
-			<?php echo do_shortcode( '[salon]' ); ?>
-		<?php else : ?>
-			<p class="note">De online agenda is nog niet actief. Installeer en activeer de plugin <em>Salon Booking System</em>, of bel <?php echo esc_html( tsb_get( 'telefoon' ) ); ?>.</p>
-		<?php endif; ?>
+	<div class="wrap narrow cta-blok">
+		<span class="eyebrow">Afspraak maken</span>
+		<h2>Kies je behandeling en reserveer online</h2>
+		<p class="lead">Klik op een behandeling hierboven, of ga direct naar de agenda.</p>
+		<a class="btn" href="<?php echo esc_url( tsb_afspraak_url() ); ?>">Naar de agenda</a>
 		<p class="note"><?php echo esc_html( tsb_get( 'annulering' ) ); ?></p>
 	</div>
 </section>
