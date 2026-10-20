@@ -30,7 +30,6 @@ $producten = array(
 			<span class="eyebrow">Oosterbeek</span>
 			<h1>Barbershop Oosterbeek</h1>
 			<p>Knippen en baard scheren voor dames, heren en kinderen. Kom langs of reserveer online.</p>
-			<a class="btn btn-ghost btn-eerste" href="#prijzen">Bekijk prijzen</a>
 			<div class="hero-facts">
 				<div><strong>Di t/m za</strong>09:30 - 18:00</div>
 				<div><strong><?php echo esc_html( strtok( tsb_get( 'adres' ), "\n" ) ); ?></strong><?php echo esc_html( trim( substr( tsb_get( 'adres' ), strpos( tsb_get( 'adres' ) . "\n", "\n" ) ) ) ); ?></div>
