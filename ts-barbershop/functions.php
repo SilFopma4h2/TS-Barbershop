@@ -263,3 +263,52 @@ function tsb_ensure_afspraak_page() {
 	tsb_ensure_page( 'foto-galerij', 'Foto galerij' );
 }
 add_action( 'after_switch_theme', 'tsb_ensure_afspraak_page' );
+
+/**
+ * Meta description, Open Graph en LocalBusiness-gegevens (JSON-LD) in de <head>.
+ * Alles komt uit de Customizer, zodat het meebeweegt met adres en openingstijden.
+ */
+add_action( 'wp_head', function () {
+	$desc  = 'Barbershop Oosterbeek: knippen en baard scheren voor dames, heren en kinderen aan de Weverstraat in Oosterbeek. Reserveer online of loop binnen.';
+	$image = get_template_directory_uri() . '/assets/img/in-actie.jpg';
+	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:type" content="website">' . "\n";
+	echo '<meta property="og:locale" content="nl_NL">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( wp_get_document_title() ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( home_url( '/' ) ) . '">' . "\n";
+	echo '<meta property="og:image" content="' . esc_url( $image ) . '">' . "\n";
+
+	if ( ! is_front_page() ) {
+		return;
+	}
+	$lines  = preg_split( '/\r\n|\r|\n/', trim( tsb_get( 'adres' ) ) );
+	$postal = isset( $lines[1] ) ? $lines[1] : '';
+	$days   = array( 'maandag' => 'Monday', 'dinsdag' => 'Tuesday', 'woensdag' => 'Wednesday', 'donderdag' => 'Thursday', 'vrijdag' => 'Friday', 'zaterdag' => 'Saturday', 'zondag' => 'Sunday' );
+	$hours  = array();
+	foreach ( tsb_pairs( tsb_get( 'tijden' ) ) as $row ) {
+		$day = strtolower( $row[0] );
+		if ( isset( $days[ $day ] ) && preg_match( '/(\d{1,2}:\d{2})\s*[-–—]\s*(\d{1,2}:\d{2})/', $row[1], $m ) ) {
+			$hours[] = array( '@type' => 'OpeningHoursSpecification', 'dayOfWeek' => $days[ $day ], 'opens' => $m[1], 'closes' => $m[2] );
+		}
+	}
+	$data = array(
+		'@context'    => 'https://schema.org',
+		'@type'       => 'HairSalon',
+		'name'        => 'Barbershop Oosterbeek',
+		'url'         => home_url( '/' ),
+		'image'       => $image,
+		'telephone'   => tsb_get( 'telefoon' ),
+		'email'       => tsb_get( 'email' ),
+		'priceRange'  => '€',
+		'address'     => array(
+			'@type'           => 'PostalAddress',
+			'streetAddress'   => $lines[0],
+			'postalCode'      => substr( $postal, 0, 7 ),
+			'addressLocality' => trim( substr( $postal, 7 ) ),
+			'addressCountry'  => 'NL',
+		),
+		'openingHoursSpecification' => $hours,
+	);
+	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+}, 5 );

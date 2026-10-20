@@ -28,7 +28,7 @@ $producten = array(
 		<div>
 			<span class="status" role="status">Openingstijden laden…</span>
 			<span class="eyebrow">Oosterbeek</span>
-			<h1>Strak geknipt. Zonder gedoe.</h1>
+			<h1>Barbershop Oosterbeek</h1>
 			<p>Knippen en baard scheren voor dames, heren en kinderen. Kom langs of reserveer online.</p>
 			<a class="btn" href="<?php echo esc_url( tsb_afspraak_url() ); ?>">Reserveer nu online</a><a class="btn btn-ghost" href="#prijzen">Bekijk prijzen</a>
 			<div class="hero-facts">
@@ -129,6 +129,7 @@ $producten = array(
 			<p><?php echo nl2br( esc_html( tsb_get( 'adres' ) ) ); ?></p>
 			<p>Tel. <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', tsb_get( 'telefoon' ) ) ); ?>"><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></a><br>
 			<a href="mailto:<?php echo esc_attr( tsb_get( 'email' ) ); ?>"><?php echo esc_html( tsb_get( 'email' ) ); ?></a></p>
+			<p><a class="btn route-knop" href="<?php echo esc_url( 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode( str_replace( "\n", ' ', tsb_get( 'adres' ) ) ) ); ?>" target="_blank" rel="noopener">Route plannen</a></p>
 		</div>
 		<iframe class="map" title="Kaart" loading="lazy"
 			src="https://www.openstreetmap.org/export/embed.html?bbox=5.8300%2C51.9830%2C5.8600%2C52.0000&amp;layer=mapnik&amp;marker=51.9915%2C5.8450"></iframe>
