@@ -16,8 +16,12 @@ sort( $fotos );
 		<span class="eyebrow">Foto&rsquo;s</span>
 		<h1 class="pagina-titel">Foto galerij</h1>
 		<?php if ( have_posts() ) : the_post(); endif; ?>
-		<?php if ( trim( get_the_content() ) ) : ?>
-			<div class="galerij-inhoud"><?php the_content(); ?></div>
+		<?php
+		$inhoud = apply_filters( 'the_content', get_the_content() );
+		$heeft_inhoud = '' !== trim( strip_tags( $inhoud, '<img><figure><ul><iframe><video>' ) );
+		?>
+		<?php if ( $heeft_inhoud ) : ?>
+			<div class="galerij-inhoud"><?php echo $inhoud; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 		<?php elseif ( $fotos ) : ?>
 			<ul class="galerij">
 				<?php foreach ( $fotos as $i => $pad ) : ?>

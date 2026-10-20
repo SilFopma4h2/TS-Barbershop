@@ -171,7 +171,20 @@ function tsb_sln_service( $slug ) {
 		return null;
 	}
 	$post = get_page_by_path( $slug, OBJECT, 'sln_service' );
-	return $post ? $post : null;
+	if ( $post ) {
+		return $post;
+	}
+	// Diensten van de oude site hebben een andere slug: zoek dan op naam.
+	foreach ( tsb_diensten() as $d ) {
+		if ( $d['slug'] === $slug ) {
+			foreach ( get_posts( array( 'post_type' => 'sln_service', 'numberposts' => -1 ) ) as $p ) {
+				if ( 0 === strcasecmp( trim( $p->post_title ), $d['naam'] ) ) {
+					return $p;
+				}
+			}
+		}
+	}
+	return null;
 }
 
 /**
@@ -204,8 +217,10 @@ function tsb_sync_services() {
 	if ( ! post_type_exists( 'sln_service' ) || ! class_exists( 'SLN_Plugin' ) ) {
 		return false;
 	}
-	$order = 0;
-	foreach ( tsb_diensten() as $d ) {
+	// Bestaat er al een dienst (bijvoorbeeld van de oude site), dan voegen we er geen dubbele aan toe.
+	$bestaand = get_posts( array( 'post_type' => 'sln_service', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids' ) );
+	$order    = 0;
+	foreach ( $bestaand ? array() : tsb_diensten() as $d ) {
 		$order++;
 		if ( tsb_sln_service( $d['slug'] ) ) {
 			continue;
@@ -311,4 +326,16 @@ add_action( 'wp_head', function () {
 		'openingHoursSpecification' => $hours,
 	);
 	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+}, 5 );
+
+/**
+ * Pagina's van de oude site (Divi) bevatten shortcodes als [et_pb_section ...] die zonder Divi als
+ * kale tekst op de pagina komen. Code-modules halen we weg, bij de rest houden we alleen de tekst.
+ */
+add_filter( 'the_content', function ( $content ) {
+	if ( false === strpos( $content, '[et_pb_' ) ) {
+		return $content;
+	}
+	$content = preg_replace( '/\[et_pb_code[^\]]*\].*?\[\/et_pb_code\]/s', '', $content );
+	return preg_replace( '/\[\/?et_pb_[a-z_0-9]+[^\]]*\]/', '', $content );
 }, 5 );
