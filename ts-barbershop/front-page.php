@@ -13,10 +13,10 @@ $reviews = array(
 );
 
 $producten = array(
-	array( 'Nish Man Wax Rugby', '6', 'product-nish-man-wax-rugby.png', 'Haarwax', 'Haarwax om je kapsel te stylen en in model te houden.' ),
-	array( 'Nish Man Wax Keratine', '6', 'product-nish-man-wax-keratine.png', 'Haarwax', 'Haarwax met keratine om je kapsel te stylen en in model te houden.' ),
-	array( 'Nish Man Gel Mystic Gummy', '6', 'product-nish-man-gel-mystic-gummy.png', 'Haargel', 'Stylinggel voor een strak gestyled kapsel.' ),
-	array( 'Nish Man Shampoo', '6', 'product-nish-man-shampoo.png', 'Shampoo', 'Shampoo voor heren om je haar te wassen.' ),
+	array( 'Nish Man Wax Rugby', '8', 'product-nish-man-wax-rugby.png', 'Haarwax', 'Haarwax om je kapsel te stylen en in model te houden.' ),
+	array( 'Nish Man Wax Keratine', '8', 'product-nish-man-wax-keratine.png', 'Haarwax', 'Haarwax met keratine om je kapsel te stylen en in model te houden.' ),
+	array( 'Nish Man Gel Mystic Gummy', '8', 'product-nish-man-gel-mystic-gummy.png', 'Haargel', 'Stylinggel voor een strak gestyled kapsel.' ),
+	array( 'Nish Man Shampoo', '10', 'product-nish-man-shampoo.png', 'Shampoo', 'Shampoo voor heren om je haar te wassen.' ),
 	array( 'Mr Rebel Black', '10', 'product-mr-rebel-black.png', 'Verzorging', 'Verzorgingsproduct van Mr Rebel, uitvoering Black.' ),
 	array( 'Mr Rebel Red', '10', 'product-mr-rebel-red.png', 'Verzorging', 'Verzorgingsproduct van Mr Rebel, uitvoering Red.' ),
 	array( 'Cologne', '6', 'product-cologne.jpg', 'Cologne', 'Cologne voor een frisse geur na het knippen of scheren.' ),
@@ -44,7 +44,14 @@ $producten = array(
 	</div>
 </section>
 
-<section class="section" id="diensten">
+<section class="section" id="welkom">
+	<div class="wrap narrow">
+		<span class="eyebrow">Welkom</span>
+		<p class="welkom-tekst">Welkom bij Barbershop Oosterbeek, de heren- en dameskapper in Oosterbeek. Sinds 2018 vindt u ons op de Weverstraat 17a. Wij knippen zowel kinderen, heren als dames. U kunt zo zonder afspraak binnenlopen. Als er dan tijd is, helpen wij u. Als u reserveert, dan gaat u voor. Namens ons: kom eens langs!</p>
+	</div>
+</section>
+
+<section class="section section-licht" id="diensten">
 	<div class="wrap">
 		<span class="eyebrow">Behandelingen</span>
 		<h2>Wat we doen</h2>
@@ -63,7 +70,7 @@ $producten = array(
 	</div>
 </section>
 
-<section class="section section-licht" id="prijzen">
+<section class="section" id="prijzen">
 	<div class="wrap">
 		<span class="eyebrow">Prijzen</span>
 		<h2>Wat het kost</h2>
@@ -92,7 +99,7 @@ $producten = array(
 	</div>
 </section>
 
-<section class="section" id="reviews">
+<section class="section section-licht" id="reviews">
 	<div class="wrap">
 		<span class="eyebrow">Over ons</span>
 		<h2>Wat onze klanten zeggen</h2>

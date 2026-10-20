@@ -61,7 +61,7 @@
 					btn.disabled = false; btn.textContent = 'Verzenden'; form.reset();
 					var msg = document.createElement( 'p' );
 					msg.className = 'alert alert-ok'; msg.setAttribute( 'role', 'status' );
-					msg.textContent = 'Bedankt, je bericht is verzonden. (Voorbeeld: er is niets verstuurd.)';
+					msg.textContent = 'Bedankt, je bericht is verzonden.';
 					form.parentNode.insertBefore( msg, form );
 					setTimeout( function () { msg.remove(); }, 5000 );
 				}, 900 );
