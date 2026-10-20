@@ -232,3 +232,7 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; text-align: center
 .hero-cta .cta-bel strong { color: var(--rood-knop); }
 @media (max-width: 800px) { .hero-inner { flex-direction: column; align-items: stretch; gap: 2rem; } .hero-cta { flex-basis: auto; } }
 .btn-eerste { margin-left: 0; }
+.hero-cta .cta-bel { position: relative; padding-right: 5.5rem; border: 2px solid var(--rood-knop); }
+.hero-cta .cta-icoon { position: absolute; right: 1.25rem; top: 50%; width: 3rem; height: 3rem; padding: .8rem; margin-top: -1.5rem; box-sizing: border-box; border-radius: 50%; background: var(--rood-knop); color: var(--wit); box-shadow: 0 6px 14px rgba(192, 57, 27, .4); }
+.hero-cta .cta-bel:hover .cta-icoon { animation: bel .5s; }
+@keyframes bel { 25% { transform: rotate(-14deg); } 75% { transform: rotate(14deg); } }

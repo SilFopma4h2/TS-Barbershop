@@ -39,7 +39,7 @@ $producten = array(
 	
 		<div class="hero-cta">
 			<a class="cta-reserveer" href="<?php echo esc_url( tsb_afspraak_url() ); ?>"><small>Naar de kapper?</small><strong>Reserveer nu online</strong></a>
-			<a class="cta-bel" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', tsb_get( 'telefoon' ) ) ); ?>"><small>Of bel</small><strong><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></strong></a>
+			<a class="cta-bel" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', tsb_get( 'telefoon' ) ) ); ?>"><svg class="cta-icoon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg><small>Of bel &middot; tik om te bellen</small><strong><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></strong></a>
 		</div>
 	</div>
 </section>
