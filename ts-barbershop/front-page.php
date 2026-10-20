@@ -37,6 +37,11 @@ $producten = array(
 				<div><strong><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></strong>Bel gerust</div>
 			</div>
 		</div>
+	
+		<div class="hero-cta">
+			<a class="cta-reserveer" href="<?php echo esc_url( tsb_afspraak_url() ); ?>"><small>Naar de kapper?</small><strong>Reserveer nu online</strong></a>
+			<a class="cta-bel" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', tsb_get( 'telefoon' ) ) ); ?>"><small>Of bel</small><strong><?php echo esc_html( tsb_get( 'telefoon' ) ); ?></strong></a>
+		</div>
 	</div>
 </section>
 
