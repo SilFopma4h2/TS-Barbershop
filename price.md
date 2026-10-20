@@ -1,82 +1,99 @@
 # Prijsadvies website Barbershop Oosterbeek
 
-Vraag aan de council: hoeveel moeten Sil en Twan de klant vragen voor de site? Vier perspectieven (Opus), gebaseerd op de repo. Alle bedragen zijn schattingen; uren, budget van de klant en KvK/KOR-status zijn onbekend.
+Peildatum 20-10-2026. Alle bedragen excl. btw tenzij anders vermeld. Dit advies combineert vier onderzoeken (marktprijzen, alternatieven, analyse van de huidige site, beoordeling van het thema) met het eerdere advies van de "council". Cijfers met een bron zijn gevonden; **(schatting)** is een eigen berekening.
 
-## Overzicht
+## Advies in één blok
 
-| Perspectief | Eenmalig | Onderhoud p/m | Confidence |
-|---|---|---|---|
-| Strategist | €950 (€750–€1.200), incl. livezetten | €25–€35 | Medium |
-| Advocate | ~€850 (€750–€1.000) excl. btw | €25–€40 | Medium |
-| Skeptic | ~€600 (€450–€750), alleen met schriftelijke afspraak | €15–€25 | Medium |
-| Innovator | €750 anker (€500–€750), of ~€450 + knipbeurten | €30 (min. 12 maanden) | Medium |
-| **Synthese** | **€750 excl. btw, ondergrens €600** | **€25, max. 1 uur wijzigingen** | Medium |
+| | Bedrag |
+|---|---|
+| **Eenmalig: richtprijs** | **€850** |
+| Ondergrens (niet eronder gaan) | €700 |
+| Openingsbod als je ruimte wilt hebben | €950 |
+| **Onderhoud** | **€25 per maand** (max. 1 uur wijzigingen, updates, backups, controle van de boeking) |
+| Hosting + domein | op naam van de klant, ca. €70–135 per jaar, buiten jullie prijs |
+| Plugin Salon Booking System | gratis versie volstaat; Basic kost €89 per jaar als de klant online betaling wil |
 
-## Strategist: "Prijs laag, verdien aan het onderhoud"
-- Vast bedrag €950 (€750–€1.200) inclusief livezetten, plus €25–€35 per maand onderhoud, los van hosting.
-- Aannames: 20–25 uur à €35–€45 (studenttarief). Een agency vraagt €75–€100 per uur.
-- De repo is klein: 46 bestanden, ~1.300 regels code. Wel echte functies: Customizer "Barbershop gegevens", contactformulier, Salon Booking System-koppeling (`tsb_sync_services`), galerij met lightbox, productdialogen.
-- Alle 6 commits staan op 2026-10-16 tussen 15:34 en 16:40. Dat begrenst wat een eerlijke prijs is.
-- Hosting, domein/DNS, SSL, backups en livezetten zijn nog niet gedaan. Reken ze in de prijs, met één feedbackronde. Extra rondes per uur.
-- Over 6 maanden: updates van WordPress en de plugin kunnen de koppeling breken (`functions.php:222-233`). €30 per maand dekt updates, backups, kleine tekstwijzigingen en een kwartaalcheck van de boeking.
-- Risico: te laag (€400) legt het anker voor alle volgende klussen. Boven ~€1.500 concurreer je met agencies. Spreek het onderhoud af vóór livegang.
-- Vraag: "Wat maakt dit later makkelijker of moeilijker?" Zonder onderhoudscontract zijn jullie de gratis helpdesk bij de eerste kapotte pluginupdate.
+Het eerdere advies was €750. Het onderzoek geeft reden om iets hoger te mikken (zie "Waarom €850").
 
-## Advocate: "Prijs wat de eigenaar echt krijgt"
-- €750–€1.000 eenmalig, richt ~€850 excl. btw, plus €25–€40 per maand voor hosting, updates en kleine wijzigingen.
-- Daarvoor krijgt de klant: hosting, site live op zijn domein, een uur uitleg ter plekke, een Nederlandstalig spiekbriefje en 30 dagen gratis fixes.
-- Onder €600 verkoop je de boeking te goedkoop. Boven €1.200 voelt het als agency-geld.
-- Waarde voor de eigenaar: online boeken met voorgekozen behandeling (`tsb_afspraak_url`), zelf adres, tijden en prijzen aanpassen, "Nu open"-badge (`feedback.js`), vertrouwde oude kleuren, contactformulier met nonce en honeypot.
-- Problemen voor de eigenaar:
-  1. Prijzen staan op twee plekken (Customizer en Salon Booking), dus ze lopen uit elkaar.
-  2. Reviews staan hard-coded in `front-page.php`.
-  3. De galerijmap `assets/img/galerij/` is leeg en vraagt FTP. Zet het Galerij-blok als standaard.
-  4. Nog niet live: hosting, domein, SSL, mail (`wp_mail`), openingstijden in de plugin, permalinks (README stap 4–8).
-  5. De echte kosten zijn support. Leg schriftelijk vast wat wel en niet inbegrepen is.
-- Vraag: "Wat gebeurt er de eerste keer dat de eigenaar zelf een prijs of foto wil wijzigen?"
+## Waarom €850
 
-## Skeptic: "Prijs op de uren en dek de risico's af"
-- €450–€750 eenmalig (anker ~€600), alleen met een A4-afspraak over scope, revisierondes en overdracht. Onderhoud optioneel, €15–€25 per maand. Wil de klant niets tekenen: lager prijzen en het werk afkappen, niet hoger prijzen met open aansprakelijkheid.
-- Aannames: 20–30 uur à €20–€30; hosting en domein betaalt de klant zelf.
-- Het thema is klein en snel gebouwd (~970 regels, 6 commits in één middag). Escaping is consistent, het formulier is veilig (`functions.php:104-133`).
-- Kwetsbaar:
-  - Koppeling met Salon Booking System via interne post-meta (`_sln_service_price`, `salon_settings`, `functions.php:204-233`). Zonder plugin toont `/afspraak/` alleen "agenda is nog niet actief" (`page-afspraak.php:44`).
-  - Prijzen dubbel opgeslagen (`functions.php:46` en `154-159`).
-  - Facebook-standaard `facebook.com/robertskapsalon/` (`functions.php:44`): klopt dat met de klant?
-- Risico's die de offerte negeert:
-  1. AVG: Google Fonts van Google-servers (`functions.php:23`), geen privacypagina of cookietekst, terwijl formulier en plugin persoonsgegevens verzamelen.
-  2. Beeldrechten: productfoto's (`assets/img/product-*.png`) en gekopieerde Google-reviews (`front-page.php:7-12`).
-  3. Mail zonder SMTP belandt vaak in spam.
-  4. Geen SEO (meta description, Open Graph, LocalBusiness-schema).
-  5. Premium pluginfuncties (sms, betalingen, Google Agenda) kosten extra.
-  6. Belasting: zonder KvK is het "resultaat uit overige werkzaamheden"; check KOR vóór btw rekenen; spreek de verdeling tussen twee personen af.
-  7. Geen einde aan de garantie.
-- In de offerte opnemen: fonts lokaal, privacypagina, SMTP, prijzen op één plek, 2 revisierondes, 30 dagen bugfixgarantie, daarna per uur.
-- Vraag: "Als Salon Booking System update en de agenda zaterdagochtend kapot is, wie krijgt de telefoon en zit dat in het onderhoud?"
+**1. Uren (de ondergrens).**
+- Al gestoken: 4–8 uur (schatting). Nog nodig voor live: 16–25 uur (schatting): hosting/DNS/SSL, SMTP, boekingsplugin inrichten, privacypagina, fonts lokaal, content opschonen, feedbackronde, uitleg aan de klant.
+- Totaal ca. 20–33 uur. Tegen €30–€40 per uur (beginnerstarief, schatting) is dat **€600–€1.300**.
+- €850 ≈ 26 uur × €32. Onder €700 werken jullie onder minimumtarief. Freelance.nl meldt een minimumtarief van €38 per uur voor zzp'ers per 2027 (https://www.freelance.nl/community/freelance-uurtarief-bepalen).
 
-## Innovator: "Prijs de zorg, niet het thema"
-- Bouwbedrag €500–€750 (quote €750), plus €30 per maand voor hosting, updates en kleine wijzigingen, minimaal 12 maanden. Eerste jaar ongeveer €1.100. Een agency vraagt €1.500–€3.000+.
-- Het thema is klein (~970 regels). Tegen €40 per uur kom je op €400–€600, dat is te weinig voor wat de klant krijgt.
-- De waarde zit in de koppeling (`tsb_sync_services()`, voorgekozen dienst op `/afspraak/`) en in het zelf kunnen aanpassen via de Customizer.
-- De annuleringstekst (`functions.php` regel 48) suggereert dat de oude site al online boeken had. Prijzen op "boekingen die de site oplevert" of omzetdeling is daarom zwak: niet te bewijzen en een kapper accepteert geen cut per knipbeurt. Deze optie is laten vallen.
-- Ankers: Wix/Squarespace met boekingsadd-on of Salonized/Treatwell kost ~€25–€60 per maand.
-- Onconventioneel: prijs in knipbeurten. €750 is ~37 herenknipbeurten à €20. Hybride: ~€450 contant, een jaar gratis knippen voor beiden, een "website door Sil & Twan"-link in de voet en toestemming om de site als case te gebruiken.
-- Omkering: vraag nu €500 en laat de klant na 3 maanden aan de hand van zijn boekingscijfers kiezen of hij het onderhoud wil.
-- Risico's: een retainer maakt jullie verantwoordelijk voor updates en uptime (spreek een maandplafond af, bijvoorbeeld 1 uur); ruil is ook inkomen voor de belasting (KvK, btw/KOR); een lage eerste prijs wordt de referentie (toon de eerstekliantkorting als aparte regel); de plugin is een afhankelijkheid.
-- Vraag: "Welke beperking accepteert iedereen zonder vragen?" Dat de betaling een eenmalig geldbedrag voor een af product moet zijn.
+**2. Markt (het plafond).**
+- Goedkope freelancer of template €500–€1.500; ervaren freelancer €1.500–€4.000 (https://www.madebyanouk.nl/blog/wat-kost-een-website-laten-maken).
+- Site van 3–5 pagina's €750–€2.500 (https://www.webwrk.nl/blog/zzp-website-laten-maken-prijs).
+- Zzp-pakketten €350–€2.000, mediaan €620 (Rankpilot, alleen gezien in een zoeksamenvatting: https://rankpilot.nl/kennisbank/website-laten-maken-zzp/).
+- Gemiddeld uurtarief zzp-webdeveloper €73 (https://bieb.knab.nl/ondernemen/wat-verdient-een-web-developer-zzp-bekijk-uurtarief-en-winst); junior ca. €60 (https://www.mijnzzp.nl/Beroep/2128-Junior-software-developer/Salaris-en-tarief). Tegen die tarieven zou dezelfde klus €1.500–€2.000 zijn.
+- €850 zit dus onderin het marktbereik. Dat past bij beginners met een lokale klant, maar het is geen koopje zonder reden: de korting is het studenttarief.
+- Kanttekening: de bouwprijzen komen grotendeels van blogs van aanbieders met eigen pakketten. Zie ze als indicatie.
 
-## Synthese
-Vraag **€750 eenmalig excl. btw** (ondergrens €600) plus **€25 per maand** onderhoud, alleen met een A4-afspraak (scope, 2 feedbackrondes, 30 dagen garantie).
+**3. Wat de klant nu betaalt en wat hij erbij krijgt.**
+- De huidige site draait op WordPress met Divi, Salon Booking System en Modula, gebouwd door Webwerkplaats (https://www.barbershop-oosterbeek.nl/). Wat de klant daarvoor betaalt, is niet te zien. Schatting: €15–€50 per maand voor hosting en onderhoud.
+- Er is dus al online boeken. Jullie verkopen geen nieuwe functie maar een betere site: sneller, mobielvriendelijk, eigen aanpasbare gegevens.
+- Gemeten problemen van de oude site (zelfde bron): HTML-laadtijd 3,7 s, 41 scripts en 10 stylesheets, geen caching, inzoomen op mobiel geblokkeerd (`user-scalable=0`), geen meta description, galerij sinds 26-11-2021 niet bijgewerkt, Facebook-link naar een oude naam.
+- Dat is jullie verkoopverhaal: meer klanten vinden en boeken makkelijker, zonder dat de kapper iets nieuws hoeft te leren.
 
-Onopgeloste keuzes:
-- Contant of deels in natura (Innovator). Laag vertrouwen; belasting nog uitzoeken.
-- Verdeling tussen Sil en Twan, en KvK/KOR-status: alleen jullie kunnen dit bepalen.
+**4. Wat het kost om het niet te doen.**
+- Boekingssoftware als alternatief: Salonized €21–€59 per maand (https://www.salonized.com/nl/prijzen), Booksy €35 (https://biz.booksy.com/de-de/pricing), Fresha $19,95 (https://www.fresha.com/pricing), Treatwell €35 plus 35% commissie op nieuwe klanten (https://pabau.com/nl/blog/salonized-vs-treatwell/).
+- Sitebouwers met boekingen: Wix Core $29,77 per maand (https://www.wix.com/plans), WordPress.com Business $25 (https://wordpress.com/nl/pricing/).
+- Jullie €25 per maand onderhoud zit onder deze alternatieven en kan met de gratis plugin.
 
-Blinde vlekken: echte uren, budget van de klant, wat de oude site kost, of de oude site al online boeken had.
+**5. Uitgedrukt in knipbeurten.**
+- Herenknip in Oosterbeek is €20 (huidige site). In Arnhem €23–€37,50 (https://www.treatwell.nl/salons/behandeling-mannen-knippen/aanbod-type-lokaal/in-arnhem-nl/).
+- €850 ≈ 43 knipbeurten à €20; €25 per maand ≈ 1,25 knipbeurt. Het is eenmalig, met één kapper plus mogelijk een hulp (de site toont 1 boekbare kapper, Robert, en een tweede account). Dat is te betalen voor een zaak die zichzelf al jaren draait (open sinds 2018, Google 4,9 volgens indebuurt: https://www.indebuurt.com/kapper-in-oosterbeek/barbershop-oosterbeek-kapper-wolfheze/).
+
+## Onderhoud: €25 per maand
+
+- Markt: onderhoudspakketten €25–€100 per maand (https://www.webwrk.nl/blog/zzp-website-laten-maken-prijs), Webexperts €25 voor hosting en onderhoud samen (alleen in zoeksamenvatting: https://webexperts.nl/website-laten-maken/zzp/).
+- Reden voor een contract: de boekingskoppeling leunt op interne onderdelen van de plugin (`functions.php:191`, `functions.php:222-233`, `page-afspraak.php:12`). Een pluginupdate kan het boeken stil breken.
+- Zet vast: maximaal 1 uur wijzigingen per maand, reactietijd (werkdagen), opzegtermijn 1 maand na de eerste 12 maanden.
+- Hosting en domein: Hostinger WordPress €1,99 per maand voor 48 maanden vooruit, daarna €9,99 (https://www.hostinger.com/nl/wordpress-hosting); Vimexx Plus €4,49 per maand, daarna €8,50 (https://www.vimexx.nl/webhosting-vergelijken); Antagonist €5,55 per maand, daarna €9,99 (https://www.antagonist.nl/). Realistisch €70–135 per jaar (schatting), op naam van de klant.
+
+## Wat erin zit (zet dit op één A4)
+
+Inbegrepen: livezetten, 2 feedbackrondes, 30 dagen gratis bugfixes, 1 uur uitleg met spiekbriefje, SMTP-instelling, privacypagina, lokale fonts, prijzen op één plek.
+Niet inbegrepen: nieuwe pagina's, foto's maken, betaalde plugin-licenties, extra rondes (per uur), problemen door wijzigingen van de klant zelf.
+
+## Wat eerst gerepareerd moet worden (raakt de prijs en de aansprakelijkheid)
+
+Uit de code-review van het thema:
+1. Prijzen staan op twee plekken (`functions.php:46` en `:152-161`); de hero-tijden zijn hard-coded (`front-page.php:34`). Wijzigt de kapper iets, dan lopen ze uiteen.
+2. Google Fonts wordt extern geladen (`functions.php:23`) en er is geen privacypagina: AVG-risico.
+3. `wp_mail` zonder SMTP belandt vaak in spam, ook voor het contactformulier.
+4. Reviews (`front-page.php:7-12`), productfoto's en dienstfoto's: eigendom/toestemming onduidelijk. Vraag schriftelijk toestemming.
+5. Facebook-standaardlink (`functions.php:44`) klopt niet; controleer.
+6. Meta description en `og:url` zijn voor elke pagina gelijk (`functions.php:272-279`).
+
+## Fiscaal (check zelf, dit is geen belastingadvies)
+
+- Geen omzetgrens voor KvK. Je schrijft in als je zelfstandig levert, een prijs vraagt waarmee je geld verdient en regelmatig levert aan anderen dan familie/vrienden (https://kvk.nl/starten/moet-ik-mijn-bedrijf-inschrijven-bij-kvk/).
+- KOR: tot €20.000 omzet per kalenderjaar geen btw rekenen (https://www.belastingdienst.nl/wps/wcm/connect/nl/btw/content/kor-voorwaarden). Reken dus pas €850 + btw als jullie niet in de KOR zitten.
+- Zonder onderneming is het "resultaat uit overige werkzaamheden": inkomstenbelasting en Zvw, geen zelfstandigenaftrek (https://www.belastingdienst.nl/wps/wcm/connect/fisin/fisin2025/inkomsten_uit_overig_werk). Voor de zelfstandigenaftrek (2026: €1.200) en de startersaftrek (€2.123) heb je het urencriterium van 1.225 uur nodig (https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/inkomstenbelasting_voor_ondernemers/voorwaarden_urencriterium).
+- Maak vooraf af wie van jullie factureert en hoe jullie delen.
+
+## Onderhandelingsruimte
+
+- Eerste prijs €950 noemen en bij tegenbod zakken naar €850 is eerlijker dan €850 noemen en naar €650 gaan.
+- Wil hij lager: schrap eerst inhoud, nooit de prijs per uur. Bijvoorbeeld de rondes terug naar 1, het onderhoud optioneel, of galerij en producten door hem laten vullen.
+- Ruil (gratis knippen) kan, maar telt als inkomen voor de belasting. Noem de waarde dan als aparte regel op de factuur.
+- Een voorstel dat te goed klinkt: omzetdeling op boekingen. Niet bewijsbaar en onhandig voor een kapper.
+
+## Onzekerheden
+
+- **Niet bekend:** wat de klant nu aan Webwerkplaats betaalt, zijn budget, het aantal Google-reviews, of Sil en Twan in de KOR zitten.
+- **Webwerkplaats** staat in de voet van de oude site ("Met liefde gemaakt door Webwerkplaats", https://www.webwerkplaats.nl). Het is netjes dat de klant dit zelf met hen afhandelt, en let op bestaande afspraken over domein en hosting voordat je verhuist.
+- Er staat een demo van een andere partij op https://lennons-gold-fade.lovable.app/ ("Lennon's Fade & Blade — Barbershop Oosterbeek"). Mogelijk pitcht iemand anders ook.
+- Een Nederlandse bron voor studententarieven is niet gevonden. Het uurtarief van €30–€40 is een eigen schatting.
+- De uren (4–8 gedaan, 16–25 te gaan) zijn een schatting op basis van de code en de git-historie.
 
 ## Volgende stappen
-1. Verdeling en KvK/KOR-status afspreken.
-2. Afspraak van één pagina opstellen (scope, 2 rondes, 30 dagen garantie, hosting op naam van de klant, onderhoud optioneel).
-3. Vóór oplevering repareren: prijzen op één plek, Google Fonts lokaal, privacypagina, SMTP, galerij via het Galerij-blok.
-4. Schriftelijk toestemming vragen voor foto's en reviews; Facebook-link controleren.
-5. Na 3 maanden de boekingscijfers met de klant bespreken en het onderhoud herzien.
+
+1. Afspreken wie factureert, en de KvK/KOR-status.
+2. A4-afspraak opstellen (scope, 2 rondes, 30 dagen garantie, onderhoud, hosting op naam van de klant).
+3. De zes reparaties hierboven doen vóór oplevering.
+4. Schriftelijke toestemming voor foto's en reviews.
+5. Bij de klant: noem €950, sluit af op €850 en €25 per maand.
+6. Na 3 maanden de boekingen en laadtijd bespreken en het onderhoud herzien.
