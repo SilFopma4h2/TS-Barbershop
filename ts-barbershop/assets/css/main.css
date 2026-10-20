@@ -227,7 +227,8 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; text-align: center
 .hero-cta .cta-bel { background: rgba(255, 255, 255, .96); color: var(--tekst); }
 .hero-cta small { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
 .hero-cta strong { display: block; font-size: 1.5rem; font-weight: 800; line-height: 1.25; margin-top: .25rem; }
-.hero-cta .cta-reserveer strong::after { content: " \2192"; display: inline-block; transition: transform .2s; }
+.hero-cta .cta-reserveer strong::after { content: "\2192"; display: inline-block; margin-left: .5rem; transition: transform .2s; }
 .hero-cta .cta-reserveer:hover strong::after { transform: translateX(4px); }
 .hero-cta .cta-bel strong { color: var(--rood-knop); }
 @media (max-width: 800px) { .hero-inner { flex-direction: column; align-items: stretch; gap: 2rem; } .hero-cta { flex-basis: auto; } }
+.btn-eerste { margin-left: 0; }
