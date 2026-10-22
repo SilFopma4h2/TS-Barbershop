@@ -157,7 +157,6 @@ function tsb_diensten() {
 		array( 'slug' => 'baard', 'naam' => 'Baard scheren/modelleren', 'img' => 'behandeling-scheren.jpg', 'prijs' => '15,00', 'tekst' => 'Je baard netjes scheren of in model brengen.' ),
 		array( 'slug' => 'knippen-baard', 'naam' => 'Knippen & baard', 'img' => 'behandeling-knippen-en-baard.jpg', 'prijs' => '33,00', 'tekst' => 'Knippen en baard in één afspraak.' ),
 		array( 'slug' => 'tondeuse', 'naam' => 'Tondeuse', 'img' => 'behandeling-tondeuze.jpg', 'prijs' => '15,00', 'tekst' => 'Met de tondeuse, in één lengte of met een nette overgang.' ),
-		array( 'slug' => 'tondeuse-baard', 'naam' => 'Tondeuse & baard', 'img' => 'behandeling-tondeuze.jpg', 'prijs' => '28,00', 'tekst' => 'Tondeuse en baard in één afspraak.' ),
 	);
 }
 
