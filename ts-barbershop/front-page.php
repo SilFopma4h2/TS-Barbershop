@@ -17,10 +17,10 @@ $producten = array(
 	array( 'Nish Man Wax Keratine', '8', 'product-nish-man-wax-keratine.png', 'Haarwax', 'Haarwax met keratine om je kapsel te stylen en in model te houden.' ),
 	array( 'Nish Man Gel Mystic Gummy', '8', 'product-nish-man-gel-mystic-gummy.png', 'Haargel', 'Stylinggel voor een strak gestyled kapsel.' ),
 	array( 'Nish Man Shampoo', '10', 'product-nish-man-shampoo.png', 'Shampoo', 'Shampoo voor heren om je haar te wassen.' ),
-	array( 'Mr Rebel Black', '10', 'product-mr-rebel-black.png', 'Verzorging', 'Verzorgingsproduct van Mr Rebel, uitvoering Black.' ),
-	array( 'Mr Rebel Red', '10', 'product-mr-rebel-red.png', 'Verzorging', 'Verzorgingsproduct van Mr Rebel, uitvoering Red.' ),
-	array( 'Cologne', '6', 'product-cologne.jpg', 'Cologne', 'Cologne voor een frisse geur na het knippen of scheren.' ),
+	array( 'Cologne', '10', 'product-cologne.jpg', 'Cologne', 'Cologne voor een frisse geur na het knippen of scheren.' ),
 	array( 'Shaving gel', '10', 'product-shaving-gel.png', 'Scheren', 'Scheergel voor een soepele, gladde scheerbeurt.' ),
+	array( 'Morfose Ultra Strong Hair Mousse', '10', 'product-morfose-hair-mousse.jpg', 'Haarmousse', 'Haarmousse met ultra sterke hold voor volume en een kapsel dat de hele dag blijft zitten.' ),
+	array( 'Nish Man Hair Spray 05', '10', 'product-nish-man-hair-spray.jpg', 'Haarspray', 'Pro-styling haarspray met ultra sterke hold, 400 ml.' ),
 );
 ?>
 <section class="hero">

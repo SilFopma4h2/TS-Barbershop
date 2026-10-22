@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TSB_VERSION', '0.1.0' );
+define( 'TSB_VERSION', '0.1.1' );
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
@@ -43,7 +43,7 @@ function tsb_defaults() {
 		'email'    => 'info@barbershop-oosterbeek.nl',
 		'facebook' => 'https://www.facebook.com/robertskapsalon/',
 		'tijden'   => "Maandag|Gesloten\nDinsdag|09:30 - 18:00\nWoensdag|09:30 - 18:00\nDonderdag|09:30 - 18:00\nVrijdag|09:30 - 18:00\nZaterdag|09:30 - 18:00\nZondag|Gesloten",
-		'prijzen'  => "Knippen dames & heren|20,00\nKnippen tot en met 14 jaar|17,00\nBaard scheren/modelleren|13,00\nKnippen & baard|33,00\nTondeuse|14,00\nExtra haar wassen|4,00\nExtra oren of neus waxen|3,00",
+		'prijzen'  => "Knippen dames & heren|20,00\nKnippen tot en met 14 jaar|17,00\nBaard scheren/modelleren|15,00\nKnippen & baard|33,00\nTondeuse|15,00\nTondeuse & baard|28,00\nExtra haar wassen|4,00\nExtra oren of neus waxen|3,00",
 		'prijsnoot' => 'Elektronische betaling: € 1,00 verwerkingskosten extra.',
 		'annulering' => 'Bij annulering minder dan 8 uur van tevoren wordt 50% van de kosten van de afspraak in rekening gebracht. Annuleren kan via de website of telefonisch.',
 	);
@@ -154,9 +154,10 @@ function tsb_diensten() {
 		array( 'slug' => 'heren', 'naam' => 'Knippen heren', 'img' => 'behandeling-heren-knippen.jpg', 'prijs' => '20,00', 'tekst' => 'Een nette herenknipbeurt, met of zonder afspraak.' ),
 		array( 'slug' => 'dames', 'naam' => 'Knippen dames', 'img' => 'behandeling-dames-knippen.jpg', 'prijs' => '20,00', 'tekst' => 'Knippen voor dames. Wassen kan er als extra bij.' ),
 		array( 'slug' => 'kinderen', 'naam' => 'Knippen kinderen', 'img' => 'behandeling-kinderen.jpg', 'prijs' => '17,00', 'tekst' => 'Knippen voor kinderen tot en met 14 jaar.' ),
-		array( 'slug' => 'baard', 'naam' => 'Baard scheren/modelleren', 'img' => 'behandeling-scheren.jpg', 'prijs' => '13,00', 'tekst' => 'Je baard netjes scheren of in model brengen.' ),
+		array( 'slug' => 'baard', 'naam' => 'Baard scheren/modelleren', 'img' => 'behandeling-scheren.jpg', 'prijs' => '15,00', 'tekst' => 'Je baard netjes scheren of in model brengen.' ),
 		array( 'slug' => 'knippen-baard', 'naam' => 'Knippen & baard', 'img' => 'behandeling-knippen-en-baard.jpg', 'prijs' => '33,00', 'tekst' => 'Knippen en baard in één afspraak.' ),
-		array( 'slug' => 'tondeuse', 'naam' => 'Tondeuse', 'img' => 'behandeling-tondeuze.jpg', 'prijs' => '14,00', 'tekst' => 'Met de tondeuse, in één lengte of met een nette overgang.' ),
+		array( 'slug' => 'tondeuse', 'naam' => 'Tondeuse', 'img' => 'behandeling-tondeuze.jpg', 'prijs' => '15,00', 'tekst' => 'Met de tondeuse, in één lengte of met een nette overgang.' ),
+		array( 'slug' => 'tondeuse-baard', 'naam' => 'Tondeuse & baard', 'img' => 'behandeling-tondeuze.jpg', 'prijs' => '28,00', 'tekst' => 'Tondeuse en baard in één afspraak.' ),
 	);
 }
 
@@ -285,7 +286,7 @@ add_action( 'after_switch_theme', 'tsb_ensure_afspraak_page' );
  */
 add_action( 'wp_head', function () {
 	$desc  = 'Barbershop Oosterbeek: knippen en baard scheren voor dames, heren en kinderen aan de Weverstraat in Oosterbeek. Reserveer online of loop binnen.';
-	$image = get_template_directory_uri() . '/assets/img/salon.jpg';
+	$image = get_template_directory_uri() . '/assets/img/salon-2026.jpg';
 	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
 	echo '<meta property="og:type" content="website">' . "\n";
 	echo '<meta property="og:locale" content="nl_NL">' . "\n";
