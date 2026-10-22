@@ -285,7 +285,7 @@ add_action( 'after_switch_theme', 'tsb_ensure_afspraak_page' );
  */
 add_action( 'wp_head', function () {
 	$desc  = 'Barbershop Oosterbeek: knippen en baard scheren voor dames, heren en kinderen aan de Weverstraat in Oosterbeek. Reserveer online of loop binnen.';
-	$image = get_template_directory_uri() . '/assets/img/in-actie.jpg';
+	$image = get_template_directory_uri() . '/assets/img/salon.jpg';
 	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
 	echo '<meta property="og:type" content="website">' . "\n";
 	echo '<meta property="og:locale" content="nl_NL">' . "\n";
